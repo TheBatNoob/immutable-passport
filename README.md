@@ -30,6 +30,7 @@ If you don't have an existing application, let's create a basic one. You can als
     cd passport-integration
 
 Initialize a new Node.js application
+
     npm init -y
 
 # 2. Registering the Application

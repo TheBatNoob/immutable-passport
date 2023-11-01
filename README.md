@@ -49,7 +49,7 @@ Install the Immutable SDK:
 Now that you have a sample web application project, you can install the Immutable SDK as a dependency. To do this, run the following command in your project's root directory:
 
     npm install -D @imtbl/sdk
-In your sample web application, create a JavaScript file (e.g., app.js) where you will initialize the Passport client and implement Passport functionalities. Here's how to initialize Passport in your app.js:
+In your sample web application, create a JavaScript file (e.g., passwordconfig.js) where you will initialize the Passport client and implement Passport functionalities. Here's how to initialize Passport:
 
     import { config, passport } from '@imtbl/sdk';
     

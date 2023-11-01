@@ -65,15 +65,14 @@ In your sample web application, create a JavaScript file (e.g., app.js) where yo
 Make sure to replace <YOUR_CLIENT_ID> with the actual client ID you obtained when registering your application in the Immutable Developer Hub.
 With the Passport client initialized in your sample application, you can now proceed to implement Passport functionalities in your app.
 
-#4 Logging in a user with Passport
+# 4. Logging in a user with Passport
 Create a new JavaScript file, e.g., passport-login.js, and add the login process functions to it. Here's the code for passport-login.js:
 
-    import { passport } from '@imtbl/sdk';
     import { ethers } from 'ethers';
     
     // Initialize Passport provider
     const initializePassportProvider = () => {
-      return passport.connectEvm();
+      return passportInstance.connectEvm();
     };
     
     // Trigger the login process
@@ -120,13 +119,13 @@ Customize your sample app's UI to include a "Login" button or action that trigge
 # 5. Displaying on the app the id token, access token obtained from authenticating with Passport after login, and the user's nickname
 
     // Retrieve the ID token
-    const idToken = passport.getIdToken();
+    const idToken = passportInstance.getIdToken();
     
     // Retrieve the access token
-    const accessToken = passport.getAccessToken();
+    const accessToken = passportInstance.getAccessToken();
     
     // Retrieve the user's nickname
-    const userProfile = await passport.getUserInfo();
+    const userProfile = await passportInstance.getUserInfo();
     const nickname = userProfile.nickname;
     
     console.log("ID Token:", idToken);
@@ -134,22 +133,11 @@ Customize your sample app's UI to include a "Login" button or action that trigge
     console.log("Nickname:", nickname);
 
 # 6. Logging out a user
-
-     // Import the Passport library
-    import { Passport } from '@imtbl/sdk';
     
-    // Initialize Passport with the logoutRedirectUri and logoutMode
-    const passport = new Passport({
-      logoutRedirectUri: 'http://localhost:3000', // Replace with your logout redirect URI
-      logoutMode: 'redirect', // Set the logout mode (optional)
-      // ... other configurations ...
-    });
-    
-    // Function to log out the user
     async function logoutUser() {
       try {
         // Call the logout function to log the user out
-        await passport.logout();
+        await passportInstance.logout();
     
         // After logging out, you can redirect the user to a specific page or display a message
         // For example, you can use window.location.href to redirect to a thank you page
@@ -159,24 +147,33 @@ Customize your sample app's UI to include a "Login" button or action that trigge
       }
     }
     
-#7. Initiate a transaction from Passport, such as sending a placeholder string and obtaining the transaction hash
+# 7. Initiate a transaction from Passport, such as sending a placeholder string and obtaining the transaction hash
 
-    async function initiateTransaction() {
+    async function initiateTransaction(toAddress, data, value) {
       try {
-        // Create a transaction object with the required properties
-        const transactionObject = {
-          to: '0xRECIPIENT_ADDRESS', // Replace with the recipient's Ethereum address
-          data: '0x68656c6c6f20776f726c64', // Hex-encoded 'hello world' or contract initialization code
-          value: '0x0', // Value transferred (0 wei in this example)
+        // Prepare the transaction object
+        const transaction = {
+          to: toAddress,
+          data: data,
+          value: value
         };
     
-        // Initiate the transaction and get the transaction hash
-        const transactionHash = await passport.sendTransaction(transactionObject);
+        // Send the transaction request
+        const transactionHash = await provider.request({
+          method: 'eth_sendTransaction',
+          params: [transaction]
+        });
     
-        console.log('Transaction initiated. Transaction hash:', transactionHash);
+        console.log('Transaction Hash:', transactionHash);
       } catch (error) {
         console.error('Error initiating transaction:', error);
       }
     }
+    
+    // Usage: Call the function with the recipient address, data, and value
+    initiateTransaction('0xRecipientAddress', '0xTransactionData', '0xTransactionValue');
 
+# Conclusion
+You've successfully integrated Immutable Passport into your web3 application. Users can now log in, log out, and access their information securely. Continue to explore and customize your application to take full advantage of Immutable Passport's capabilities for user authentication, wallet management, and transactions.
+    
 

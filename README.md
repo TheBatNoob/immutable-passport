@@ -26,9 +26,8 @@ A code editor (e.g., Visual Studio Code).
 # 1. Creating a Simple Application
 If you don't have an existing application, let's create a basic one. You can also skip this step if you already have an application.
 
-# Create a new directory for your application
-mkdir passport-integration
-cd passport-integration
+    mkdir passport-integration
+    cd passport-integration
 
 # Initialize a new Node.js application
-npm init -y
+    npm init -y

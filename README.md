@@ -29,5 +29,15 @@ If you don't have an existing application, let's create a basic one. You can als
     mkdir passport-integration
     cd passport-integration
 
-# Initialize a new Node.js application
+Initialize a new Node.js application
     npm init -y
+
+# 2. Registering the Application
+Before using Passport, you must register your application as an OAuth 2.0 client in the Immutable Developer Hub. First, you'll need to create a project and a testnet environment. Then you can navigate to the Passport config screen and create a passport client for your created environment.
+---Property	---Description
+
+|Application Type	The type of your application. At the moment, only the Web Application option is available. A Native option for mobile or desktop applications is coming soon.
+|Client name	The name you wish to use to identify your application.
+|Logout URLs	The URL that your users will be redirected to upon logging out of your application.
+|Callback URLs	The URL that your users will be redirected to once the authentication is complete. This is also where your application processes the authentication response.
+|Web Origins URLs	The URLs that are allowed to request authorization. This field is available when you select the Native application type.

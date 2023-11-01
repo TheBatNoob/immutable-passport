@@ -150,6 +150,8 @@ Customize your sample app's UI to include a "Login" button or action that trigge
     
 # 7. Initiate a transaction from Passport, such as sending a placeholder string and obtaining the transaction hash
 
+    import { initializePassportProvider } from './passport-login.js';
+    
     async function initiateTransaction(toAddress, data, value) {
       try {
         // Prepare the transaction object
@@ -158,9 +160,11 @@ Customize your sample app's UI to include a "Login" button or action that trigge
           data: data,
           value: value
         };
-    
+
+        const passportProvider = initializePassportProvider();
+        
         // Send the transaction request
-        const transactionHash = await provider.request({
+        const transactionHash = await passportProvider.request({
           method: 'eth_sendTransaction',
           params: [transaction]
         });
